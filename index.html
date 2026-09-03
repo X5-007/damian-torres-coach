@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Damian Torres — Coach de Entrenamiento</title>
+<meta name="description" content="Entrenamiento personalizado, presencial y a distancia. Rutinas a tu medida, seguimiento real y corrección de técnica.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Work+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ NAV ============ -->
+<header class="nav" id="nav">
+  <div class="nav__inner">
+    <a href="#top" class="nav__brand" id="navBrand"></a>
+    <nav class="nav__links" id="navLinks">
+      <a href="#sobre-mi">Sobre mí</a>
+      <a href="#paquetes">Paquetes</a>
+      <a href="#rutina">Rutinas</a>
+      <a href="#suplementos">Suplementos</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a href="#" class="btn btn--primary btn--sm" id="navCta">WhatsApp</a>
+    <button class="nav__toggle" id="navToggle" aria-label="Abrir menú">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="hero__bg" aria-hidden="true"></div>
+    <div class="hero__inner">
+      <p class="eyebrow" id="heroEyebrow"></p>
+      <h1 class="hero__headline" id="heroHeadline"></h1>
+      <p class="hero__sub" id="heroSub"></p>
+      <div class="hero__ctas">
+        <a href="#" class="btn btn--primary" id="heroCtaPrimary"></a>
+        <a href="#paquetes" class="btn btn--ghost" id="heroCtaSecondary"></a>
+      </div>
+      <div class="hero__stats" id="heroStats"></div>
+    </div>
+  </section>
+
+  <!-- ============ SOBRE MÍ ============ -->
+  <section class="section" id="sobre-mi">
+    <div class="section__inner">
+      <div class="about__intro">
+        <h2 id="aboutTitle"></h2>
+        <p id="aboutText"></p>
+      </div>
+      <div class="about__pillars" id="aboutPillars"></div>
+    </div>
+  </section>
+
+  <!-- ============ PAQUETES ============ -->
+  <section class="section section--alt" id="paquetes">
+    <div class="section__inner">
+      <p class="section__eyebrow">Paquetes</p>
+      <h2 class="section__title">Elige cómo quieres entrenar.</h2>
+      <div class="packages" id="packagesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ============ RUTINA PREVIEW ============ -->
+  <section class="section" id="rutina">
+    <div class="section__inner section__inner--split">
+      <div class="routine__copy">
+        <p class="section__eyebrow">Cómo trabajo</p>
+        <h2 id="routineTitle"></h2>
+        <p id="routineText"></p>
+      </div>
+      <div class="routine__card" id="routineCard"></div>
+    </div>
+  </section>
+
+  <!-- ============ SUPLEMENTOS ============ -->
+  <section class="section section--alt" id="suplementos">
+    <div class="section__inner section__inner--center">
+      <p class="section__eyebrow">Próximamente</p>
+      <h2 id="supplementsTitle"></h2>
+      <p id="supplementsText"></p>
+    </div>
+  </section>
+
+  <!-- ============ CONTACTO ============ -->
+  <section class="section contact" id="contacto">
+    <div class="section__inner section__inner--center">
+      <h2 id="contactTitle"></h2>
+      <p id="contactText"></p>
+      <a href="#" class="btn btn--primary btn--lg" id="contactWhatsapp"></a>
+      <div class="contact__socials" id="contactSocials"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="footer__inner">
+    <span id="footerBrand"></span>
+    <span id="footerText"></span>
+  </div>
+</footer>
+
+<a href="#" class="whatsapp-fab" id="whatsappFab" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.3.63 4.44 1.72 6.28L4 29l7.9-1.66a12 12 0 0 0 4.12.73h.01c6.62 0 12.02-5.4 12.02-12.02C28.05 8.4 22.65 3 16.02 3zm0 21.86h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.75.79.8-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.2c0-5.46 4.45-9.9 9.93-9.9 2.65 0 5.14 1.03 7.01 2.9a9.85 9.85 0 0 1 2.9 7.01c0 5.47-4.45 9.93-9.72 9.93zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37s-1.04 1.02-1.04 2.48 1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
+<script src="content.js"></script>
+<script src="script.js"></script>
+</body>
+</html>
