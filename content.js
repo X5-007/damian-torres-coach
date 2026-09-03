@@ -72,7 +72,7 @@ const SITE_DATA = {
   // showPrices: true  -> se muestran los precios (como en tus diseños)
   // showPrices: false -> se ocultan los precios y solo se muestra
   //                      "Cotiza por WhatsApp" (por si cambias de opinión)
-  showPrices: true,
+  showPrices: false,
 
   packages: [
     {
