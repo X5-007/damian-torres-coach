@@ -187,6 +187,14 @@ const SITE_DATA = {
   },
 
   // ---------------------------------------------------------------------
+  // GOOGLE ANALYTICS — cantidad de visitas, ciudad, dispositivo, etc.
+  // ---------------------------------------------------------------------
+  analytics: {
+    enabled: true,
+    measurementId: "G-W892HEVR0S",
+  },
+
+  // ---------------------------------------------------------------------
   // JUEGO INTERACTIVO — "Descubre tu plan" (swipe de objetivos)
   // ---------------------------------------------------------------------
   game: {
