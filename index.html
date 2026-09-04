@@ -24,6 +24,7 @@
     <nav class="nav__links" id="navLinks">
       <a href="#sobre-mi">Sobre mí</a>
       <a href="#paquetes">Paquetes</a>
+      <a href="#juego">Tu plan</a>
       <a href="#rutina">Rutinas</a>
       <a href="#suplementos">Suplementos</a>
       <a href="#contacto">Contacto</a>
@@ -72,6 +73,19 @@
     </div>
   </section>
 
+  <!-- ============ JUEGO: DESCUBRE TU PLAN ============ -->
+  <section class="section section--alt" id="juego">
+    <div class="section__inner section__inner--center">
+      <p class="section__eyebrow">Interactivo</p>
+      <h2 id="gameTitle"></h2>
+      <p id="gameIntro"></p>
+
+      <div class="swipe" id="swipeApp">
+        <div class="swipe__stack" id="swipeStack"></div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ RUTINA PREVIEW ============ -->
   <section class="section" id="rutina">
     <div class="section__inner section__inner--split">
@@ -114,6 +128,14 @@
 
 <a href="#" class="whatsapp-fab" id="whatsappFab" aria-label="Escribir por WhatsApp">
   <svg viewBox="0 0 32 32" width="26" height="26" fill="currentColor"><path d="M16.02 3C9.4 3 4 8.4 4 15.02c0 2.3.63 4.44 1.72 6.28L4 29l7.9-1.66a12 12 0 0 0 4.12.73h.01c6.62 0 12.02-5.4 12.02-12.02C28.05 8.4 22.65 3 16.02 3zm0 21.86h-.01a9.9 9.9 0 0 1-5.05-1.38l-.36-.21-3.75.79.8-3.66-.24-.38a9.86 9.86 0 0 1-1.51-5.2c0-5.46 4.45-9.9 9.93-9.9 2.65 0 5.14 1.03 7.01 2.9a9.85 9.85 0 0 1 2.9 7.01c0 5.47-4.45 9.93-9.72 9.93zm5.44-7.43c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.24-.46-2.36-1.46-.87-.78-1.46-1.74-1.63-2.04-.17-.3-.02-.46.13-.6.13-.13.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.07-.15-.67-1.62-.92-2.22-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37s-1.04 1.02-1.04 2.48 1.07 2.87 1.22 3.07c.15.2 2.1 3.2 5.08 4.49.71.31 1.26.49 1.69.63.71.22 1.36.19 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.3.17-1.42-.07-.13-.27-.2-.57-.35z"/></svg>
+</a>
+
+<a href="#juego" class="game-fab" id="gameFab">
+  <span class="game-fab__ring" aria-hidden="true"></span>
+  <span class="game-fab__icon" aria-hidden="true">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z"/></svg>
+  </span>
+  <span class="game-fab__text" id="gameFabText"></span>
 </a>
 
 <script src="content.js"></script>

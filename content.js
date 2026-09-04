@@ -72,7 +72,7 @@ const SITE_DATA = {
   // showPrices: true  -> se muestran los precios (como en tus diseños)
   // showPrices: false -> se ocultan los precios y solo se muestra
   //                      "Cotiza por WhatsApp" (por si cambias de opinión)
-  showPrices: false,
+  showPrices: true,
 
   packages: [
     {
@@ -184,6 +184,51 @@ const SITE_DATA = {
         },
       ],
     },
+  },
+
+  // ---------------------------------------------------------------------
+  // JUEGO INTERACTIVO — "Descubre tu plan" (swipe de objetivos)
+  // ---------------------------------------------------------------------
+  game: {
+    enabled: true,
+    title: "Descubre tu plan ideal",
+    intro:
+      "Desliza las tarjetas: derecha si te interesa, izquierda si no. Al final te decimos qué paquete te conviene.",
+
+    // Cada tarjeta que el usuario desliza. "icon" debe existir en script.js
+    cards: [
+      { id: "grasa", icon: "flame", label: "Bajar grasa" },
+      { id: "musculo", icon: "dumbbell", label: "Ganar músculo" },
+      { id: "tono", icon: "spark", label: "Tonificar" },
+      { id: "resistencia", icon: "heartpulse", label: "Resistencia" },
+      { id: "fuerza", icon: "bolt", label: "Fuerza" },
+    ],
+
+    // Pregunta abierta al final (sin opciones, para captar cualquier gimnasio de Colima)
+    gymQuestion: "¿Dónde entrenas?",
+    gymPlaceholder: "Escribe el nombre de tu gimnasio",
+    gymHelper: "Nos ayuda a conocerte mejor. No compartimos esta información con nadie.",
+
+    // Según cuántas tarjetas le interesaron, se le sugiere un paquete.
+    // "packageTitle" debe coincidir EXACTO con un "title" de la lista de paquetes de arriba.
+    resultMapping: [
+      { minLikes: 0, maxLikes: 1, packageTitle: "Rutina Enfocada" },
+      { minLikes: 2, maxLikes: 3, packageTitle: "Entrenamiento Personal" },
+      { minLikes: 4, maxLikes: 5, packageTitle: "Atención VIP Exclusiva" },
+    ],
+
+    // Pega aquí la URL de tu Google Apps Script (ver README) para recibir
+    // los resultados en una hoja de cálculo. Si lo dejas vacío, el juego
+    // funciona igual pero no guarda los datos en ningún lado.
+    sheetsWebhookUrl: "",
+  },
+
+  // ---------------------------------------------------------------------
+  // BOTÓN FLOTANTE DEL JUEGO (aparece en toda la página, lleva a "Tu plan")
+  // ---------------------------------------------------------------------
+  gameFab: {
+    enabled: true,
+    text: "¿Cuál es tu plan?",
   },
 
   // ---------------------------------------------------------------------

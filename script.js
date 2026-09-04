@@ -20,6 +20,11 @@
     instagram: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r="0.9" fill="currentColor" stroke="none"/></svg>',
     facebook: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M14 9h2.5V6h-2.5c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v6h3v-6h2.3l.4-3h-2.7V9.6c0-.4.3-.6.5-.6z"/></svg>',
     whatsapp: '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-7.7 13.6L3 21l4.5-1.3A9 9 0 1 0 12 3zm0 16.2a7.2 7.2 0 0 1-3.7-1l-.3-.2-2.7.8.8-2.6-.2-.3A7.2 7.2 0 1 1 12 19.2zm4-5.4c-.2-.1-1.3-.6-1.5-.7-.2-.1-.3-.1-.5.1s-.6.7-.7.9-.3.2-.5.1a5.9 5.9 0 0 1-1.7-1 6.4 6.4 0 0 1-1.2-1.5c-.1-.2 0-.3.1-.4l.3-.4c.1-.1.1-.2.2-.4a.4.4 0 0 0 0-.4c-.1-.1-.5-1.2-.7-1.6s-.4-.4-.5-.4h-.4a.9.9 0 0 0-.6.3 2.6 2.6 0 0 0-.8 2c0 1.2.9 2.3 1 2.5s1.7 2.6 4.2 3.6a5.4 5.4 0 0 0 3.2.2 2.4 2.4 0 0 0 1.5-1.1c.2-.4.2-.7.1-.8s-.2-.1-.4-.2z"/></svg>',
+    flame: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3s-5 4.5-5 9.5a5 5 0 0 0 10 0c0-1.6-.7-2.7-1.4-3.7.1 1.4-.6 2.3-1.3 2.3-1 0-1-1-1-1.8 0-1.4-1-2.9-1.3-6.3z"/><path d="M9.5 15.5a2.5 2.5 0 0 0 5 0"/></svg>',
+    dumbbell: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 10v4M2.5 9v6M7 8v8M17 8v8M21.5 9v6M20 10v4M7 12h10"/></svg>',
+    spark: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6z"/></svg>',
+    heartpulse: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 20s-7.5-4.7-9.6-9.4C1.2 7.4 3 4.3 6.2 4c2-.2 3.4 1 4.4 2.3M12 20s7.5-4.7 9.6-9.4C22.8 7.4 21 4.3 17.8 4c-1.6-.1-2.9.6-3.9 1.6"/><path d="M3 12h4l1.5-3L11 15l1.8-4.5L14 12h7"/></svg>',
+    bolt: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M13 2 4 14h6l-1 8 9-12h-6z"/></svg>',
   };
 
   // ---- Nav / brand ----
@@ -30,6 +35,14 @@
   const navCta = document.getElementById('navCta');
   navCta.href = waLink();
   document.getElementById('whatsappFab').href = waLink();
+
+  // ---- Game floating button ----
+  const gameFab = document.getElementById('gameFab');
+  if (!d.game || !d.game.enabled || !d.gameFab || !d.gameFab.enabled) {
+    if (gameFab) gameFab.remove();
+  } else {
+    document.getElementById('gameFabText').textContent = d.gameFab.text;
+  }
 
   // ---- Hero ----
   document.getElementById('heroEyebrow').textContent = d.hero.eyebrow;
@@ -155,4 +168,163 @@
   document.getElementById('navLinks').querySelectorAll('a').forEach((a) => {
     a.addEventListener('click', () => nav.classList.remove('nav--open'));
   });
+
+  // =========================================================================
+  // JUEGO: "DESCUBRE TU PLAN" (swipe de objetivos)
+  // =========================================================================
+  const gameSection = document.getElementById('juego');
+  if (!d.game || !d.game.enabled) {
+    if (gameSection) gameSection.remove();
+  } else {
+    document.getElementById('gameTitle').textContent = d.game.title;
+    document.getElementById('gameIntro').textContent = d.game.intro;
+
+    const stack = document.getElementById('swipeStack');
+    const cardsData = d.game.cards.slice();
+    let index = 0;
+    const likes = [];
+
+    function sendToSheets(payload) {
+      if (!d.game.sheetsWebhookUrl) return;
+      fetch(d.game.sheetsWebhookUrl, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain' },
+        body: JSON.stringify(payload),
+      }).catch(() => {});
+    }
+
+    function pickPackage() {
+      const count = likes.length;
+      const tier = d.game.resultMapping.find((r) => count >= r.minLikes && count <= r.maxLikes);
+      const title = tier ? tier.packageTitle : d.game.resultMapping[0].packageTitle;
+      return d.packages.find((p) => p.title === title) || d.packages[0];
+    }
+
+    function renderProgress() {
+      const remaining = cardsData.length - index;
+      let bar = stack.querySelector('.swipe__progress');
+      if (!bar) return;
+      bar.textContent = remaining > 0 ? `${index}/${cardsData.length}` : '';
+    }
+
+    function renderCard() {
+      if (index >= cardsData.length) {
+        renderGymStep();
+        return;
+      }
+      const card = cardsData[index];
+      stack.innerHTML = `
+        <div class="swipe__card" id="activeCard">
+          <span class="swipe__stamp swipe__stamp--yes" id="stampYes">Me interesa</span>
+          <span class="swipe__stamp swipe__stamp--no" id="stampNo">Paso</span>
+          <div class="swipe__card-icon">${icons[card.icon] || icons.spark}</div>
+          <div class="swipe__card-label">${card.label}</div>
+          <div class="swipe__card-hint">Desliza o usa los botones</div>
+        </div>
+        <div class="swipe__controls">
+          <button class="swipe__btn swipe__btn--no" id="btnNo" aria-label="No me interesa">✕</button>
+          <button class="swipe__btn swipe__btn--yes" id="btnYes" aria-label="Me interesa">♥</button>
+        </div>
+        <div class="swipe__progress">${index + 1} / ${cardsData.length}</div>
+      `;
+
+      const el = document.getElementById('activeCard');
+      const stampYes = document.getElementById('stampYes');
+      const stampNo = document.getElementById('stampNo');
+
+      let startX = 0, currentX = 0, dragging = false;
+
+      function onDown(clientX) {
+        dragging = true;
+        startX = clientX;
+        el.classList.add('dragging');
+      }
+      function onMove(clientX) {
+        if (!dragging) return;
+        currentX = clientX - startX;
+        el.style.transform = `translateX(${currentX}px) rotate(${currentX / 18}deg)`;
+        stampYes.style.opacity = currentX > 30 ? Math.min(currentX / 100, 1) : 0;
+        stampNo.style.opacity = currentX < -30 ? Math.min(-currentX / 100, 1) : 0;
+      }
+      function onUp() {
+        if (!dragging) return;
+        dragging = false;
+        el.classList.remove('dragging');
+        if (currentX > 100) {
+          resolveCard(true);
+        } else if (currentX < -100) {
+          resolveCard(false);
+        } else {
+          el.style.transform = '';
+          stampYes.style.opacity = 0;
+          stampNo.style.opacity = 0;
+        }
+        currentX = 0;
+      }
+
+      el.addEventListener('pointerdown', (e) => { el.setPointerCapture(e.pointerId); onDown(e.clientX); });
+      el.addEventListener('pointermove', (e) => onMove(e.clientX));
+      el.addEventListener('pointerup', onUp);
+      el.addEventListener('pointercancel', onUp);
+
+      document.getElementById('btnYes').addEventListener('click', () => resolveCard(true));
+      document.getElementById('btnNo').addEventListener('click', () => resolveCard(false));
+
+      function resolveCard(liked) {
+        el.classList.add(liked ? 'swipe__card--flyout-right' : 'swipe__card--flyout-left');
+        if (liked) likes.push(cardsData[index]);
+        index += 1;
+        setTimeout(renderCard, 220);
+      }
+    }
+
+    function renderGymStep() {
+      stack.innerHTML = `
+        <div class="swipe__gym">
+          <h3>${d.game.gymQuestion}</h3>
+          <p>${d.game.gymHelper}</p>
+          <input type="text" class="swipe__input" id="gymInput" placeholder="${d.game.gymPlaceholder}" autocomplete="off">
+          <button class="btn btn--primary" id="gymSubmit" style="width:100%;">Ver mi resultado</button>
+        </div>
+      `;
+      const input = document.getElementById('gymInput');
+      const submit = document.getElementById('gymSubmit');
+      const go = () => {
+        const gym = input.value.trim();
+        renderResult(gym);
+      };
+      submit.addEventListener('click', go);
+      input.addEventListener('keydown', (e) => { if (e.key === 'Enter') go(); });
+    }
+
+    function renderResult(gym) {
+      const pkg = pickPackage();
+      const objetivosList = likes.map((l) => l.label).join(', ') || 'sin preferencia específica';
+
+      sendToSheets({
+        timestamp: new Date().toISOString(),
+        objetivos: objetivosList,
+        paquete_sugerido: pkg.title,
+        gimnasio: gym || 'no especificado',
+      });
+
+      stack.innerHTML = `
+        <div class="swipe__result">
+          <div class="swipe__result-tag">Tu plan recomendado</div>
+          <div class="swipe__result-package">${pkg.title}</div>
+          <div class="swipe__result-list">Basado en: ${objetivosList}</div>
+          <a class="btn btn--primary" style="width:100%;" href="${waLink(`Hola ${d.brand.name}, hice el test de la página y me recomendó el paquete "${pkg.title}". Quiero más información.`)}">Quiero este plan</a>
+          <button class="swipe__restart" id="restartGame">Volver a jugar</button>
+        </div>
+      `;
+      document.getElementById('restartGame').addEventListener('click', () => {
+        index = 0;
+        likes.length = 0;
+        renderCard();
+      });
+    }
+
+    renderCard();
+  }
 })();
