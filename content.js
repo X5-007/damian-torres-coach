@@ -220,7 +220,7 @@ const SITE_DATA = {
     // Pega aquí la URL de tu Google Apps Script (ver README) para recibir
     // los resultados en una hoja de cálculo. Si lo dejas vacío, el juego
     // funciona igual pero no guarda los datos en ningún lado.
-    sheetsWebhookUrl: "",
+    sheetsWebhookUrl: "https://script.google.com/macros/s/AKfycbx0nSDQjpp0b1-6BzjPEcJkU6zVJYTVbwRX6RW9c-AVrrPzWZ0WAVmXU-ZIsZajxYV2/exec",
   },
 
   // ---------------------------------------------------------------------
