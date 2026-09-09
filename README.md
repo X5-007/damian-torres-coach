@@ -58,3 +58,23 @@ coloques dentro hereda automáticamente el contraste correcto.
 
 Sube los archivos a la rama que sirve tu sitio (en GitHub Pages normalmente
 `main`). No hay que compilar nada: al recargar la página ya se ven los cambios.
+
+## Tarjetas de paquetes para compartir
+
+En `marketing/` están las cuatro tarjetas cuadradas (1080 × 1080) listas para
+enviar por WhatsApp, historias o publicaciones:
+
+- `paquete-01.jpg` … `paquete-04.jpg`
+
+Se generan desde `marketing/paquetes.html`, que usa el mismo sistema de diseño
+del sitio. Para actualizar precios o beneficios, edita el arreglo `PAQUETES`
+dentro de ese archivo y vuelve a exportar:
+
+```bash
+npm install playwright   # solo la primera vez
+node marketing/render.mjs
+```
+
+Los textos de estas tarjetas son independientes de `content.js`: son las
+promociones con precio tachado, mientras que la web muestra los paquetes
+sin descuento.
