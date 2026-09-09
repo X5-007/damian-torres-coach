@@ -46,10 +46,10 @@ const SITE_DATA = {
   about: {
     title: "Entrenamiento serio, resultados reales.",
     text:
-      "No entreno a 5 personas a la vez ni te doy una rutina de internet. Diseño cada plan según tu objetivo, tu nivel y tu progreso, y le doy seguimiento de cerca para que cada sesión valga la pena.",
+      "Tengo 18 años soy de Colima y actualmente tengo más de 3 años ayudando a personas con su cambio fìsico perosnal, no entreno a 5 personas a la vez ni te doy una rutina de internet. Diseño cada plan según tu objetivo, tu nivel y tu progreso, y le doy seguimiento de cerca para que cada sesión valga la pena.",
     pillars: [
       {
-        icon: "target",
+        icon: "target",                        
         title: "Rutinas a tu medida",
         text: "Cada plan se construye según tu objetivo: bajar grasa, ganar músculo o ambos.",
       },
