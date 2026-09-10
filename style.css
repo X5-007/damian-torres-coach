@@ -1069,6 +1069,8 @@ button { font: inherit; }
 }
 .supplements .badge { margin-bottom: 20px; }
 .supplements .lead { margin-inline: auto; }
+.supplements__cta { margin-top: 26px; }
+.supplements__cta[hidden] { display: none; }
 
 /* -------------------------------------------------------------------------
    14. CONTACTO
