@@ -492,11 +492,12 @@ button { font: inherit; }
 }
 
 /* -------------------------------------------------------------------------
-   8. BOTE 3D
+   8. FOTO DEL PRODUCTO
    -------------------------------------------------------------------------
-   El bote se arma en JavaScript con varios segmentos girados en círculo.
-   Aquí solo viven la perspectiva, el giro y las sombras.
+   Los productos se muestran con su foto real sobre un fondo de estudio.
    ------------------------------------------------------------------------- */
+
+/* Estudio del hero */
 .stage {
   position: relative;
   width: 100%;
@@ -504,102 +505,65 @@ button { font: inherit; }
   aspect-ratio: 1 / 1.05;
   display: grid;
   place-items: center;
-  perspective: 1100px;
-}
-.stage::after {
-  content: "";
-  position: absolute;
-  bottom: 12%;
-  width: 62%;
-  height: 26px;
-  border-radius: 50%;
-  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), transparent 70%);
-  filter: blur(6px);
 }
 .stage::before {
   content: "";
   position: absolute;
-  width: 78%;
+  width: 82%;
   aspect-ratio: 1;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 161, 90, 0.20), transparent 66%);
+  background: radial-gradient(circle, rgba(201, 161, 90, 0.30), rgba(201, 161, 90, 0.06) 48%, transparent 70%);
 }
-
-.jar3d {
-  position: relative;
-  width: var(--jar-w, 150px);
-  height: var(--jar-h, 210px);
-  transform-style: preserve-3d;
-  z-index: 1;
-}
-.jar {
+.stage::after {
+  content: "";
   position: absolute;
-  inset: 0;
-  transform-style: preserve-3d;
-  transform: rotateX(-8deg) rotateY(var(--spin, 0deg));
-  animation: jar-spin 26s linear infinite;
-  animation-play-state: paused;
-  will-change: transform;
-}
-.jar--visible { animation-play-state: running; }
-.jar--manual { animation: none; }
-@keyframes jar-spin {
-  from { transform: rotateX(-8deg) rotateY(0deg); }
-  to   { transform: rotateX(-8deg) rotateY(360deg); }
-}
-
-.jar__seg {
-  position: absolute;
-  top: 0;
-  left: 50%;
-  height: 100%;
-  backface-visibility: hidden;
-}
-.jar__cap {
-  position: absolute;
-  left: 50%;
+  bottom: 14%;
+  width: 48%;
+  height: 22px;
   border-radius: 50%;
-  transform-style: preserve-3d;
-}
-.jar__label {
-  position: absolute;
-  left: 50%;
-  top: 32%;
-  width: 74%;
-  transform: translateX(-50%) translateZ(calc(var(--jar-r, 62px) + 1px));
-  text-align: center;
-  pointer-events: none;
-  backface-visibility: hidden;
-}
-.jar__label b {
-  display: block;
-  font-family: var(--font-display);
-  font-size: 0.86rem;
-  line-height: 1.15;
-  letter-spacing: 0.02em;
-}
-.jar__label i {
-  display: block;
-  font-style: normal;
-  font-size: 0.56rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.7;
-  margin-top: 4px;
+  background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.55), transparent 70%);
+  filter: blur(7px);
 }
 
-/* Foto real del producto: marco con inclinación 3D */
-.photo3d {
+.shot {
   position: relative;
-  width: 100%;
-  height: 100%;
+  z-index: 1;
   display: grid;
   place-items: center;
-  transform-style: preserve-3d;
-  transform: rotateY(var(--tilt-y, 0deg)) rotateX(var(--tilt-x, 0deg));
+  width: 100%;
+  padding: 10px;
+}
+/* La altura se fija en píxeles: así una foto ancha (una bolsa) y una alta
+   (un bote) ocupan el mismo espacio y ninguna se sale de su tarjeta. */
+.shot__img {
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 14px 22px rgba(23, 21, 18, 0.20));
   transition: transform 0.4s var(--ease);
 }
-.photo3d img { max-height: 100%; width: auto; filter: drop-shadow(0 18px 26px rgba(0, 0, 0, 0.35)); }
+.shot--sm .shot__img { height: 172px; }
+.shot--lg .shot__img { height: 300px; filter: drop-shadow(0 20px 30px rgba(23, 21, 18, 0.24)); }
+.stage .shot--lg .shot__img { height: 296px; filter: drop-shadow(0 22px 34px rgba(0, 0, 0, 0.5)); }
+
+@media (max-width: 760px) {
+  .shot--lg .shot__img { height: 236px; }
+}
+
+/* Producto sin foto todavía */
+.shot__placeholder {
+  display: grid;
+  place-items: center;
+  width: 58%;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--r-md);
+  border: 1px dashed var(--line-strong);
+  background: var(--paper-warm);
+  color: var(--text-mute);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+}
 
 /* -------------------------------------------------------------------------
    9. BARRA DE CONFIANZA
@@ -723,13 +687,13 @@ button { font: inherit; }
 /* Escenario 3D dentro de la tarjeta */
 .card__stage {
   position: relative;
+  overflow: hidden;
   height: 210px;
   display: grid;
   place-items: center;
-  perspective: 900px;
   background:
-    radial-gradient(70% 60% at 50% 42%, rgba(201, 161, 90, 0.14), transparent 70%),
-    linear-gradient(180deg, var(--paper-warm), var(--paper-card));
+    radial-gradient(64% 52% at 50% 38%, #ffffff, transparent 72%),
+    linear-gradient(180deg, var(--paper-card), var(--paper-warm));
   border: 0;
   padding: 0;
   width: 100%;
@@ -746,9 +710,7 @@ button { font: inherit; }
   background: radial-gradient(ellipse at center, rgba(23, 21, 18, 0.30), transparent 70%);
   filter: blur(4px);
 }
-.card__stage .jar3d { transition: transform 0.35s var(--ease); }
-.card:hover .card__stage .jar3d { transform: scale(1.06); }
-.card:hover .card__stage .jar { animation-duration: 8s; }
+.card:hover .card__stage .shot__img { transform: scale(1.07) translateY(-3px); }
 
 .card__zoom {
   position: absolute;
@@ -906,30 +868,21 @@ button { font: inherit; }
   position: relative;
   display: grid;
   place-items: center;
-  padding: 40px 20px;
-  background: var(--ink);
-  perspective: 1100px;
+  padding: 34px 24px;
+  background:
+    radial-gradient(58% 46% at 50% 36%, #ffffff, transparent 74%),
+    linear-gradient(170deg, var(--paper-card) 20%, var(--paper-warm));
   border-radius: var(--r-lg) 0 0 var(--r-lg);
-  cursor: grab;
-  touch-action: pan-y;
-  user-select: none;
 }
-.detail__stage.is-dragging { cursor: grabbing; }
 .detail__stage::before {
   content: "";
   position: absolute;
-  width: 74%;
-  aspect-ratio: 1;
+  bottom: 15%;
+  width: 46%;
+  height: 22px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(201, 161, 90, 0.22), transparent 66%);
-}
-.detail__drag {
-  position: absolute;
-  bottom: 16px;
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(243, 239, 232, 0.45);
+  background: radial-gradient(ellipse at center, rgba(23, 21, 18, 0.34), transparent 72%);
+  filter: blur(6px);
 }
 .detail__body { padding: clamp(26px, 3.2vw, 40px); display: flex; flex-direction: column; }
 .detail__brand {
@@ -951,7 +904,7 @@ button { font: inherit; }
 
 @media (max-width: 760px) {
   .detail { grid-template-columns: 1fr; }
-  .detail__stage { border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 34px 20px 40px; }
+  .detail__stage { border-radius: var(--r-lg) var(--r-lg) 0 0; padding: 30px 24px; }
 }
 
 /* -------------------------------------------------------------------------
@@ -999,10 +952,16 @@ button { font: inherit; }
   width: 44px; height: 44px;
   border-radius: 10px;
   display: grid; place-items: center;
+  background: var(--paper-warm);
+  border: 1px solid var(--line);
+  color: var(--text-mute);
   font-family: var(--font-display);
   font-size: 0.78rem;
   font-weight: 700;
+  overflow: hidden;
+  padding: 3px;
 }
+.cart__swatch img { width: 100%; height: 100%; object-fit: contain; }
 .cart__item h3 { font-size: 0.92rem; line-height: 1.25; }
 .cart__item p { font-size: 0.76rem; color: var(--text-mute); }
 .qty { display: inline-flex; align-items: center; gap: 2px; }
@@ -1245,7 +1204,6 @@ button { font: inherit; }
     transition-duration: 0.001ms !important;
   }
   .reveal { opacity: 1; transform: none; }
-  .jar { animation: none; }
 }
 
 @media print {

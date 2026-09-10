@@ -11,7 +11,6 @@
 
   const d = CATALOGO;
   const $ = (id) => document.getElementById(id);
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   /* ====================================================================
      1. UTILIDADES
@@ -71,119 +70,33 @@
   };
 
   /* ====================================================================
-     3. BOTE EN 3D
+     3. IMAGEN DEL PRODUCTO
      ====================================================================
-     Se arma con N segmentos girados en círculo: cada uno es una tira
-     vertical con el degradado del envase. Al girarlos todos se ve
-     como un bote cilíndrico real.
+     Cada producto se muestra con su foto real (campo "image" de catalogo.js).
+     Si un producto todavía no tiene foto, se dibuja un marcador con sus
+     iniciales para que la tarjeta no quede vacía.
      ==================================================================== */
-  const SEGMENTS = 20;
 
-  /* Aclara u oscurece un color hexadecimal */
-  const shade = (hex, amount) => {
-    const n = parseInt(String(hex).replace('#', ''), 16);
-    const ch = [(n >> 16) & 255, (n >> 8) & 255, n & 255].map((v) => {
-      const out = amount >= 0 ? v + (255 - v) * amount : v * (1 + amount);
-      return Math.max(0, Math.min(255, Math.round(out)));
-    });
-    return `rgb(${ch.join(',')})`;
-  };
-
-  /**
-   * Construye el bote 3D.
-   * @param {object} opts  colors, labelTop, labelSub, width, height
-   * @returns {HTMLElement} el contenedor .jar3d
-   */
-  function buildJar(opts) {
-    const colors = opts.colors;
-    const w = opts.width || 150;
-    const h = opts.height || 210;
-    const r = w / 2;
-    const segW = (2 * r * Math.tan(Math.PI / SEGMENTS)) + 0.8;
-
-    const wrap = document.createElement('div');
-    wrap.className = 'jar3d';
-    wrap.style.setProperty('--jar-w', `${w}px`);
-    wrap.style.setProperty('--jar-h', `${h}px`);
-    wrap.style.setProperty('--jar-r', `${r}px`);
-
-    const jar = document.createElement('div');
-    jar.className = 'jar';
-
-    const body = colors.body;
-    const band = colors.band;
-    const cap = colors.cap;
-
-    /* Tapa superior */
-    const lid = document.createElement('div');
-    lid.className = 'jar__cap';
-    lid.style.width = `${w}px`;
-    lid.style.height = `${w}px`;
-    lid.style.marginLeft = `${-r}px`;
-    lid.style.marginTop = `${-r}px`;
-    lid.style.top = '0';
-    lid.style.transform = 'rotateX(90deg)';
-    lid.style.background = `radial-gradient(circle at 38% 34%, ${shade(cap, 0.28)}, ${shade(cap, -0.2)} 78%)`;
-    jar.appendChild(lid);
-
-    /* Segmentos del cilindro */
-    for (let i = 0; i < SEGMENTS; i++) {
-      const angle = (360 / SEGMENTS) * i;
-      const seg = document.createElement('div');
-      seg.className = 'jar__seg';
-      seg.style.width = `${segW}px`;
-      seg.style.marginLeft = `${-segW / 2}px`;
-      seg.style.transform = `rotateY(${angle}deg) translateZ(${r}px)`;
-      seg.style.background = [
-        'linear-gradient(180deg,',
-        `${shade(cap, 0.1)} 0 9%,`,
-        `${shade(cap, -0.35)} 9% 11.5%,`,
-        `${shade(body, 0.04)} 11.5% 30%,`,
-        `${band} 30% 66%,`,
-        `${shade(body, 0.02)} 66% 93%,`,
-        `${shade(body, -0.3)} 93% 100%)`,
-      ].join(' ');
-      /* Luz falsa: los segmentos del frente se ven más claros */
-      const light = 0.62 + 0.38 * Math.max(0, Math.cos((angle - 24) * Math.PI / 180));
-      seg.style.filter = `brightness(${light.toFixed(3)})`;
-      jar.appendChild(seg);
-    }
-
-    /* Etiqueta al frente */
-    if (opts.labelTop) {
-      const label = document.createElement('div');
-      label.className = 'jar__label';
-      label.style.color = colors.text || '#171512';
-      label.innerHTML =
-        `<b>${esc(opts.labelTop)}</b>` +
-        (opts.labelSub ? `<i>${esc(opts.labelSub)}</i>` : '');
-      jar.appendChild(label);
-    }
-
-    wrap.appendChild(jar);
-    return wrap;
-  }
-
-  /* Si el producto tiene foto se muestra la foto en un marco 3D */
   function buildVisual(p, size) {
-    const cat = categoryOf(p.category);
+    const wrap = document.createElement('div');
+    wrap.className = `shot shot--${size === 'lg' ? 'lg' : 'sm'}`;
+
     if (p.image) {
-      const wrap = document.createElement('div');
-      wrap.className = 'photo3d';
       const img = document.createElement('img');
+      img.className = 'shot__img';
       img.src = p.image;
       img.alt = fullName(p);
-      img.loading = 'lazy';
+      img.loading = size === 'lg' ? 'eager' : 'lazy';
+      img.decoding = 'async';
       wrap.appendChild(img);
-      return wrap;
+    } else {
+      const ph = document.createElement('span');
+      ph.className = 'shot__placeholder';
+      ph.textContent = (p.brand || p.name).slice(0, 2).toUpperCase();
+      ph.setAttribute('aria-hidden', 'true');
+      wrap.appendChild(ph);
     }
-    return buildJar({
-      colors: cat.colors,
-      labelTop: p.name,
-      labelSub: p.brand,
-      width: size === 'lg' ? 190 : 132,
-      height: size === 'lg' ? 268 : 186,
-    });
+    return wrap;
   }
 
   /* ====================================================================
@@ -208,17 +121,9 @@
     .map((s) => `<li><strong>${esc(s.number)}</strong><span>${esc(s.label)}</span></li>`)
     .join('');
 
-  /* Bote grande del hero */
-  const showcaseCat = categoryOf(d.hero.showcase.colorKey);
-  $('heroStage').appendChild(
-    buildJar({
-      colors: showcaseCat.colors,
-      labelTop: d.hero.showcase.label || showcaseCat.name,
-      labelSub: d.brand.name,
-      width: 170,
-      height: 240,
-    })
-  );
+  /* Envase grande del hero: un producto real del catálogo */
+  const showcase = productOf(d.hero.showcase.productId) || d.products[0];
+  $('heroStage').appendChild(buildVisual(showcase, 'lg'));
   $('heroStageHint').textContent = `${d.brand.claim} · ${d.brand.location}`;
 
   /* ====================================================================
@@ -370,7 +275,6 @@
   const modal = $('productModal');
   const modalBody = $('modalBody');
   let lastFocused = null;
-  let dragState = null;
 
   $('modalClose').innerHTML = icons.close;
 
@@ -385,9 +289,7 @@
 
     modalBody.innerHTML = `
       <div class="detail">
-        <div class="detail__stage" id="detailStage">
-          <p class="detail__drag">Arrastra para girar</p>
-        </div>
+        <div class="detail__stage" id="detailStage"></div>
         <div class="detail__body">
           <p class="detail__brand">${esc(p.brand)}</p>
           <h2 class="detail__name" id="modalName">${esc(p.name)}</h2>
@@ -404,13 +306,7 @@
         </div>
       </div>`;
 
-    const stage = $('detailStage');
-    const visual = buildVisual(p, 'lg');
-    stage.insertBefore(visual, stage.firstChild);
-
-    const jar = visual.querySelector('.jar');
-    if (jar && !reduceMotion) jar.classList.add('jar--visible');
-    setupDrag(stage, visual);
+    $('detailStage').appendChild(buildVisual(p, 'lg'));
 
     modalBody.querySelector('[data-add]').addEventListener('click', () => addToCart(p.id));
 
@@ -422,69 +318,8 @@
   function closeDetail() {
     modal.hidden = true;
     modalBody.innerHTML = '';
-    dragState = null;
     if (cartEl.hidden) document.body.classList.remove('is-locked');
     if (lastFocused) lastFocused.focus();
-  }
-
-  /* Giro con el dedo o el ratón */
-  function setupDrag(stage, visual) {
-    const jar = visual.querySelector('.jar');
-    const photo = visual.classList.contains('photo3d') ? visual : null;
-    let spin = 0;
-    let velocity = 0;
-    let raf = null;
-
-    const apply = () => {
-      if (jar) jar.style.transform = `rotateX(-8deg) rotateY(${spin}deg)`;
-      if (photo) {
-        photo.style.setProperty('--tilt-y', `${Math.max(-28, Math.min(28, spin))}deg`);
-      }
-    };
-
-    const inertia = () => {
-      if (Math.abs(velocity) < 0.05) {
-        raf = null;
-        if (jar && !reduceMotion) {
-          /* Reanuda el giro automático justo donde quedó, sin salto */
-          const vuelta = ((spin % 360) + 360) % 360;
-          jar.style.animationDelay = `${-(vuelta / 360) * 26}s`;
-          jar.style.transform = '';
-          jar.classList.remove('jar--manual');
-        }
-        return;
-      }
-      spin += velocity;
-      velocity *= 0.94;
-      apply();
-      raf = requestAnimationFrame(inertia);
-    };
-
-    stage.addEventListener('pointerdown', (e) => {
-      if (jar) jar.classList.add('jar--manual');
-      if (raf) { cancelAnimationFrame(raf); raf = null; }
-      stage.classList.add('is-dragging');
-      stage.setPointerCapture(e.pointerId);
-      dragState = { x: e.clientX, spin };
-      velocity = 0;
-    });
-
-    stage.addEventListener('pointermove', (e) => {
-      if (!dragState) return;
-      const delta = (e.clientX - dragState.x) * 0.6;
-      velocity = delta - (spin - dragState.spin);
-      spin = dragState.spin + delta;
-      apply();
-    });
-
-    const end = () => {
-      if (!dragState) return;
-      dragState = null;
-      stage.classList.remove('is-dragging');
-      if (!reduceMotion) raf = requestAnimationFrame(inertia);
-    };
-    stage.addEventListener('pointerup', end);
-    stage.addEventListener('pointercancel', end);
   }
 
   modal.addEventListener('click', (e) => {
@@ -537,11 +372,12 @@
       cartItemsEl.innerHTML = order
         .map((it) => {
           const p = productOf(it.id);
-          const cat = categoryOf(p.category);
+          const miniatura = p.image
+            ? `<img src="${esc(p.image)}" alt="" loading="lazy">`
+            : esc(p.brand.slice(0, 2).toUpperCase());
           return `
             <div class="cart__item">
-              <span class="cart__swatch" aria-hidden="true"
-                    style="background:${cat.colors.body};color:${cat.colors.band}">${esc(p.brand.slice(0, 2).toUpperCase())}</span>
+              <span class="cart__swatch" aria-hidden="true">${miniatura}</span>
               <div>
                 <h3>${esc(p.name)}</h3>
                 <p>${esc([p.brand, p.variant, p.size].filter(Boolean).join(' · '))}</p>
@@ -749,20 +585,8 @@
       { rootMargin: '0px 0px -8% 0px', threshold: 0.08 }
     );
     document.querySelectorAll('.reveal').forEach((el) => revealObserver.observe(el));
-
-    /* Los botes solo giran mientras se ven: ahorra batería en el celular */
-    const jarObserver = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          entry.target.classList.toggle('jar--visible', entry.isIntersecting && !reduceMotion);
-        });
-      },
-      { threshold: 0.15 }
-    );
-    document.querySelectorAll('.jar').forEach((j) => jarObserver.observe(j));
   } else {
     document.querySelectorAll('.reveal').forEach((el) => el.classList.add('is-in'));
-    document.querySelectorAll('.jar').forEach((j) => j.classList.add('jar--visible'));
   }
 
   /* Las tarjetas también aparecen escalonadas */
