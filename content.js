@@ -244,8 +244,12 @@ const SITE_DATA = {
   // ---------------------------------------------------------------------
   supplements: {
     enabled: true,
+    badge: "FaithLure Supplements",
     title: "Catálogo de suplementos",
-    text: "Muy pronto. Estoy armando mi catálogo de suplementos recomendados para complementar tu entrenamiento.",
+    text: "Creatinas, preentrenos y proteínas originales, seleccionadas para acompañar tu entrenamiento. Cotiza y pide por WhatsApp.",
+    // Deja ctaUrl vacío ("") si quieres volver al aviso de "próximamente"
+    ctaText: "Ver catálogo de suplementos",
+    ctaUrl: "suplementos/",
   },
 
   // ---------------------------------------------------------------------
