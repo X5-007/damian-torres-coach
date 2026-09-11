@@ -249,7 +249,7 @@ const SITE_DATA = {
     text: "Creatinas, preentrenos y proteínas originales, seleccionadas para acompañar tu entrenamiento. Cotiza y pide por WhatsApp.",
     // Deja ctaUrl vacío ("") si quieres volver al aviso de "próximamente"
     ctaText: "Ver catálogo de suplementos",
-    ctaUrl: "suplementos/",
+    ctaUrl: "https://x5-007.github.io/faithlure/",
   },
 
   // ---------------------------------------------------------------------
