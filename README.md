@@ -1,8 +1,8 @@
 # Damian Torres — repositorio retirado
 
 El sitio de coach que vivía aquí **ya no existe por separado**. Su contenido
-(presentación, pilares y los cuatro paquetes de entrenamiento) se integró a la
-página única de FaithLure, en el apartado "Entrenamiento".
+(presentación y los cuatro paquetes de entrenamiento) vive ahora en la landing
+de entrenamiento del embudo de FaithLure.
 
 ## Dónde está ahora
 
@@ -10,10 +10,10 @@ página única de FaithLure, en el apartado "Entrenamiento".
 |---|---|
 | **Repositorio** | https://github.com/X5-007/faithlure |
 | **Página** | https://x5-007.github.io/faithlure/ |
-| **Apartado de entrenamiento** | https://x5-007.github.io/faithlure/#entrenamiento |
+| **Landing de entrenamiento** | https://x5-007.github.io/faithlure/entrenamiento/ |
 
-Todo se edita desde `catalogo.js` de ese repositorio: la tienda en los bloques
-de arriba y el entrenamiento en el bloque `training`.
+Todo se edita desde `config.js` de ese repositorio. La carpeta `sitio/` de este
+repositorio es la copia de trabajo desde la que se publica.
 
 ## Para terminar de retirar este sitio
 

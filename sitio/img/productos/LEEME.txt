@@ -1,0 +1,7 @@
+Aquí van las fotos de los productos, una por producto.
+
+Recomendación: WebP con fondo transparente, unos 640 px de alto.
+
+Después escribe la ruta en el campo "imagen" del producto, dentro de config.js:
+
+    imagen: "img/productos/on-gold-standard.webp",
