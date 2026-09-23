@@ -1,75 +1,31 @@
-# Damian Torres — Coach de entrenamiento
+# Damian Torres — repositorio retirado
 
-Sitio web estático (HTML + CSS + JavaScript, sin dependencias ni compilación).
-Se puede publicar tal cual en GitHub Pages, Netlify, Vercel o cualquier hosting.
+El sitio de coach que vivía aquí **ya no existe por separado**. Su contenido
+(presentación, pilares y los cuatro paquetes de entrenamiento) se integró a la
+página única de FaithLure, en el apartado "Entrenamiento".
 
-## Archivos
+## Dónde está ahora
 
-| Archivo | Para qué sirve |
+| | |
 |---|---|
-| `index.html` | Estructura de la página (secciones y orden). |
-| `style.css` | Todo el diseño: colores, tipografías, espaciados, responsive. |
-| `script.js` | Toma la información de `content.js` y la dibuja en la página. También controla el juego "Descubre tu plan". |
-| `content.js` | **El único archivo que necesitas editar para cambiar textos, precios y contactos.** |
-| `img/perfil.png` | Foto de perfil (nav, sobre mí, tarjeta del hero). |
-| `img/hero-bg.jpg` | Foto principal del bloque de inicio. |
-| `suplementos/` | **Página de FaithLure Supplements** (catálogo). Tiene su propio `README.md` y se puede publicar con un dominio aparte. |
+| **Repositorio** | https://github.com/X5-007/faithlure |
+| **Página** | https://x5-007.github.io/faithlure/ |
+| **Apartado de entrenamiento** | https://x5-007.github.io/faithlure/#entrenamiento |
 
-## Cómo actualizar la información
+Todo se edita desde `catalogo.js` de ese repositorio: la tienda en los bloques
+de arriba y el entrenamiento en el bloque `training`.
 
-Abre `content.js` y cambia lo que está entre comillas `" "`. No borres las comas.
+## Para terminar de retirar este sitio
 
-- **Mostrar u ocultar precios:** `showPrices: true` / `false`.
-- **Apagar una sección:** `enabled: false` (suplementos, juego, botón flotante).
-- **Cambiar el WhatsApp:** `contact.whatsappNumber` (solo los 10 dígitos).
-- **Destacar un paquete:** `highlight: true` lo convierte en la tarjeta oscura con distintivo.
-- **Acento dorado en un paquete:** `accent: "gold"`.
+Falta un paso que solo puedes hacer tú desde GitHub:
 
-Si cambias las fotos, conserva los mismos nombres de archivo dentro de `img/`.
+**Settings → Pages → Source → None**
 
-## Sistema de diseño
+Con eso la dirección `x5-007.github.io/damian-torres-coach/` deja de publicarse.
+Mientras no lo hagas, seguirá activa aunque los archivos ya no estén.
 
-Dirección de arte *editorial*: base cálida tipo papel, tinta profunda y un único
-acento en arcilla con apoyos en bronce. Tipografías **Fraunces** (títulos) e
-**Inter** (texto), cargadas desde Google Fonts.
+## Recuperar el sitio anterior
 
-Todos los colores, tamaños y espaciados están definidos como variables al
-principio de `style.css`, en el bloque `:root`. Cambiar una variable ahí
-actualiza el sitio completo. Por ejemplo:
-
-```css
---clay:   #b23a2e;   /* acento principal */
---bronze: #a97b3f;   /* acento secundario */
---paper:  #f7f4ef;   /* fondo claro */
---ink:    #171512;   /* fondo oscuro */
-```
-
-Las superficies oscuras (`.section--ink`, la tarjeta VIP, la cabecera de la
-rutina) reasignan estas variables, así que cualquier contenido nuevo que
-coloques dentro hereda automáticamente el contraste correcto.
-
-## Detalles incluidos
-
-- Diseño responsive de 320 px a pantallas grandes, con menú móvil.
-- Aparición progresiva de las secciones al hacer scroll y resaltado del enlace activo en el menú.
-- Respeta `prefers-reduced-motion` y tiene estilos de impresión.
-- Enlace directo para saltar al contenido y foco visible para navegación con teclado.
-
-## Página de suplementos
-
-La carpeta `suplementos/` es un sitio completo e independiente
-(FaithLure Supplements): catálogo por categorías, productos en 3D, lista de
-pedido y compra por WhatsApp. Se publica junto con este sitio en
-`tudominio.com/suplementos/`, o por separado con su propio dominio.
-
-Las instrucciones para editar el catálogo y publicarlo están en
-`suplementos/README.md`.
-
-La sección "Suplementos" de esta página enlaza al catálogo mediante
-`supplements.ctaUrl` en `content.js`. Si dejas ese campo vacío (`""`), vuelve a
-mostrarse solo el aviso, sin botón.
-
-## Publicar
-
-Sube los archivos a la rama que sirve tu sitio (en GitHub Pages normalmente
-`main`). No hay que compilar nada: al recargar la página ya se ven los cambios.
+No se perdió nada: los archivos siguen en el historial de este repositorio.
+Para verlos, busca el commit anterior a "Retirar el sitio de coach" en la
+pestaña **Commits**.
