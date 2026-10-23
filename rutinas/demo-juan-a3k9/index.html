@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rutina de Juan Pérez — DAMIAN TORRES</title>
+<meta name="description" content="3 días de entrenamiento: Pecho / Tríceps · Espalda / Bíceps · Pierna / Glúteo. Con video de cada ejercicio. Actualizada el 23 de octubre de 2026.">
+<meta name="theme-color" content="#171512">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Vista previa al compartir por WhatsApp -->
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="DAMIAN TORRES — Coach de entrenamiento">
+<meta property="og:title" content="Rutina de Juan Pérez — DAMIAN TORRES">
+<meta property="og:description" content="3 días de entrenamiento: Pecho / Tríceps · Espalda / Bíceps · Pierna / Glúteo. Con video de cada ejercicio. Actualizada el 23 de octubre de 2026.">
+<meta property="og:url" content="https://x5-007.github.io/damian-torres-coach/rutinas/demo-juan-a3k9/">
+<meta property="og:image" content="https://x5-007.github.io/damian-torres-coach/rutinas/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Rutina personalizada de DAMIAN TORRES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rutina de Juan Pérez — DAMIAN TORRES">
+<meta name="twitter:description" content="3 días de entrenamiento: Pecho / Tríceps · Espalda / Bíceps · Pierna / Glúteo. Con video de cada ejercicio. Actualizada el 23 de octubre de 2026.">
+<meta name="twitter:image" content="https://x5-007.github.io/damian-torres-coach/rutinas/og.jpg">
+
+<link rel="icon" href="../../img/perfil.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../base/rutina.css">
+</head>
+<body>
+
+<header class="topbar" id="topbar">
+  <div class="wrap topbar__inner">
+    <img class="topbar__avatar" src="../../img/perfil.png" alt="">
+    <div>
+      <div class="topbar__name" id="topName"></div>
+      <div class="topbar__role" id="topRole"></div>
+    </div>
+  </div>
+</header>
+
+<section class="ficha">
+  <div class="wrap ficha__inner">
+    <p class="eyebrow">Plan de entrenamiento</p>
+    <h1 id="alumno"></h1>
+    <p class="ficha__sub" id="resumen"></p>
+    <div class="ficha__chips" id="chips"></div>
+    <div class="nota-coach" id="notaCoach"></div>
+  </div>
+</section>
+
+<nav class="dias" id="dias" aria-label="Días de entrenamiento">
+  <div class="wrap dias__scroll" id="diasTabs"></div>
+</nav>
+
+<div id="diasPanels"></div>
+
+<footer class="pie">
+  <div class="wrap">
+    <span class="pie__mark" id="pieMark"></span>
+    <strong id="pieName"></strong>
+    <p id="pieText"></p>
+  </div>
+</footer>
+
+<a class="wa-fab" id="waFab" href="#"></a>
+
+<script type="application/json" id="datos">
+{
+  "version": 1,
+  "alumno": "Juan Pérez",
+  "slug": "demo-juan-a3k9",
+  "objetivo": "Bajar grasa y ganar músculo",
+  "paquete": "Entrenamiento Personal",
+  "vigencia": "Octubre – Diciembre 2026",
+  "actualizado": "2026-10-23",
+  "nota": "Calienta 8 minutos antes de cada sesión y estira al terminar. Si algún ejercicio te molesta una articulación, párate y avísame por WhatsApp.",
+  "sitio": "https://x5-007.github.io/damian-torres-coach",
+  "coach": {
+    "nombre": "DAMIAN TORRES",
+    "rol": "Coach de entrenamiento",
+    "iniciales": "DT",
+    "whatsapp": "3131536627"
+  },
+  "dias": [
+    {
+      "nombre": "Lunes",
+      "enfoque": "Pecho / Tríceps",
+      "bloques": [
+        {
+          "grupo": "Pecho",
+          "ejercicios": [
+            {
+              "id": "press-banca-maquina",
+              "nombre": "Press banca en máquina",
+              "grupo": "Pecho",
+              "clip": "press-banca-maquina.mp4",
+              "poster": "press-banca-maquina.jpg",
+              "series": "3",
+              "reps": "8-10",
+              "descanso": "90 s",
+              "nota": "Baja controlado en 2 segundos. No rebotes la barra en el pecho."
+            },
+            {
+              "id": "press-inclinado-maquina",
+              "nombre": "Press inclinado en máquina",
+              "grupo": "Pecho",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "10-12",
+              "descanso": "75 s",
+              "nota": ""
+            },
+            {
+              "id": "aperturas-polea",
+              "nombre": "Aperturas en polea",
+              "grupo": "Pecho",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "12-15",
+              "descanso": "60 s",
+              "nota": "Codos ligeramente flexionados todo el recorrido."
+            }
+          ]
+        },
+        {
+          "grupo": "Tríceps",
+          "ejercicios": [
+            {
+              "id": "press-frances",
+              "nombre": "Press francés",
+              "grupo": "Tríceps",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "8-12",
+              "descanso": "60 s",
+              "nota": ""
+            },
+            {
+              "id": "jalon-polea-triceps",
+              "nombre": "Jalón de polea para tríceps",
+              "grupo": "Tríceps",
+              "clip": "",
+              "poster": "",
+              "series": "2",
+              "reps": "10-15",
+              "descanso": "45 s",
+              "nota": "Pega los codos al cuerpo."
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Miércoles",
+      "enfoque": "Espalda / Bíceps",
+      "bloques": [
+        {
+          "grupo": "Espalda",
+          "ejercicios": [
+            {
+              "id": "jalon-al-pecho",
+              "nombre": "Jalón al pecho",
+              "grupo": "Espalda",
+              "clip": "jalon-al-pecho.mp4",
+              "poster": "jalon-al-pecho.jpg",
+              "series": "4",
+              "reps": "8-10",
+              "descanso": "90 s",
+              "nota": "Lleva los codos hacia las costillas, no jales solo con los brazos."
+            },
+            {
+              "id": "remo-sentado-polea",
+              "nombre": "Remo sentado en polea",
+              "grupo": "Espalda",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "10-12",
+              "descanso": "75 s",
+              "nota": ""
+            },
+            {
+              "id": "pullover-polea",
+              "nombre": "Pullover en polea",
+              "grupo": "Espalda",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "12",
+              "descanso": "60 s",
+              "nota": ""
+            }
+          ]
+        },
+        {
+          "grupo": "Bíceps",
+          "ejercicios": [
+            {
+              "id": "curl-barra-z",
+              "nombre": "Curl con barra Z",
+              "grupo": "Bíceps",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "8-10",
+              "descanso": "60 s",
+              "nota": "Sin impulso de cadera."
+            },
+            {
+              "id": "curl-martillo",
+              "nombre": "Curl martillo",
+              "grupo": "Bíceps",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "10-12",
+              "descanso": "45 s",
+              "nota": ""
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "nombre": "Viernes",
+      "enfoque": "Pierna / Glúteo",
+      "bloques": [
+        {
+          "grupo": "Pierna",
+          "ejercicios": [
+            {
+              "id": "sentadilla-smith",
+              "nombre": "Sentadilla en Smith",
+              "grupo": "Pierna",
+              "clip": "sentadilla-smith.mp4",
+              "poster": "sentadilla-smith.jpg",
+              "series": "4",
+              "reps": "8-10",
+              "descanso": "120 s",
+              "nota": "Pies un poco adelantados y rodillas en línea con la punta del pie."
+            },
+            {
+              "id": "prensa-piernas",
+              "nombre": "Prensa de piernas",
+              "grupo": "Pierna",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "12",
+              "descanso": "90 s",
+              "nota": ""
+            },
+            {
+              "id": "curl-femoral",
+              "nombre": "Curl femoral acostado",
+              "grupo": "Pierna",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "12",
+              "descanso": "60 s",
+              "nota": ""
+            },
+            {
+              "id": "pantorrilla-parado",
+              "nombre": "Pantorrilla de pie",
+              "grupo": "Pierna",
+              "clip": "",
+              "poster": "",
+              "series": "4",
+              "reps": "15-20",
+              "descanso": "45 s",
+              "nota": "Pausa 1 segundo arriba."
+            }
+          ]
+        },
+        {
+          "grupo": "Glúteo",
+          "ejercicios": [
+            {
+              "id": "hip-thrust",
+              "nombre": "Hip thrust",
+              "grupo": "Glúteo",
+              "clip": "",
+              "poster": "",
+              "series": "3",
+              "reps": "10-12",
+              "descanso": "75 s",
+              "nota": "Mentón metido, aprieta arriba 1 segundo."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script src="../base/rutina.js"></script>
+</body>
+</html>

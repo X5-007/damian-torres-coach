@@ -14,6 +14,7 @@ Se puede publicar tal cual en GitHub Pages, Netlify, Vercel o cualquier hosting.
 | `img/perfil.png` | Foto de perfil (nav, sobre mí, tarjeta del hero). |
 | `img/hero-bg.jpg` | Foto principal del bloque de inicio. |
 | `suplementos/` | **Página de FaithLure Supplements** (catálogo). Tiene su propio `README.md` y se puede publicar con un dominio aparte. |
+| `rutinas/` | **Sistema de rutinas personalizadas.** Armador privado + una página por alumno con link para WhatsApp. Tiene su propio `README.md`. |
 
 ## Cómo actualizar la información
 
@@ -93,3 +94,16 @@ node marketing/render.mjs
 Los textos de estas tarjetas son independientes de `content.js`: son las
 promociones con precio tachado, mientras que la web muestra los paquetes
 sin descuento.
+
+## Rutinas personalizadas
+
+En `rutinas/` vive el sistema para crear rutinas y mandárselas a tus alumnos
+por WhatsApp. Cada alumno tiene su página con un link fijo que se actualiza
+cuando editas la rutina.
+
+- Armador (solo para ti): `rutinas/armador/`
+- Guía completa: [`rutinas/README.md`](rutinas/README.md)
+- Videos de los ejercicios: `rutinas/clips/` (specs en `clips/LEEME.txt`)
+
+El archivo `.nojekyll` de la raíz es necesario para que GitHub Pages publique
+todas las carpetas tal cual. No lo borres.
