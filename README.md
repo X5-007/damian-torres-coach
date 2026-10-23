@@ -14,6 +14,7 @@ Se puede publicar tal cual en GitHub Pages, Netlify, Vercel o cualquier hosting.
 | `img/perfil.png` | Foto de perfil (nav, sobre mí, tarjeta del hero). |
 | `img/hero-bg.jpg` | Foto principal del bloque de inicio. |
 | `suplementos/` | **Página de FaithLure Supplements** (catálogo). Tiene su propio `README.md` y se puede publicar con un dominio aparte. |
+| `rutinas/` | **Sistema de rutinas personalizadas.** Armador privado + una página por alumno con link para WhatsApp. Tiene su propio `README.md`. |
 
 ## Cómo actualizar la información
 
@@ -73,3 +74,36 @@ mostrarse solo el aviso, sin botón.
 
 Sube los archivos a la rama que sirve tu sitio (en GitHub Pages normalmente
 `main`). No hay que compilar nada: al recargar la página ya se ven los cambios.
+
+## Tarjetas de paquetes para compartir
+
+En `marketing/` están las cuatro tarjetas cuadradas (1080 × 1080) listas para
+enviar por WhatsApp, historias o publicaciones:
+
+- `paquete-01.jpg` … `paquete-04.jpg`
+
+Se generan desde `marketing/paquetes.html`, que usa el mismo sistema de diseño
+del sitio. Para actualizar precios o beneficios, edita el arreglo `PAQUETES`
+dentro de ese archivo y vuelve a exportar:
+
+```bash
+npm install playwright   # solo la primera vez
+node marketing/render.mjs
+```
+
+Los textos de estas tarjetas son independientes de `content.js`: son las
+promociones con precio tachado, mientras que la web muestra los paquetes
+sin descuento.
+
+## Rutinas personalizadas
+
+En `rutinas/` vive el sistema para crear rutinas y mandárselas a tus alumnos
+por WhatsApp. Cada alumno tiene su página con un link fijo que se actualiza
+cuando editas la rutina.
+
+- Armador (solo para ti): `rutinas/armador/`
+- Guía completa: [`rutinas/README.md`](rutinas/README.md)
+- Videos de los ejercicios: `rutinas/clips/` (specs en `clips/LEEME.txt`)
+
+El archivo `.nojekyll` de la raíz es necesario para que GitHub Pages publique
+todas las carpetas tal cual. No lo borres.
