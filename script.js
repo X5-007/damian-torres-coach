@@ -202,6 +202,15 @@
   } else {
     $('supplementsTitle').textContent = d.supplements.title;
     $('supplementsText').textContent = d.supplements.text;
+    if (d.supplements.badge) $('supplementsBadge').textContent = d.supplements.badge;
+
+    /* Si hay catálogo publicado se muestra el botón; si no, sigue el aviso */
+    const supCta = $('supplementsCta');
+    if (d.supplements.ctaUrl) {
+      supCta.href = d.supplements.ctaUrl;
+      supCta.textContent = d.supplements.ctaText || 'Ver catálogo';
+      supCta.hidden = false;
+    }
   }
 
   /* --------------------------------------------------------------------

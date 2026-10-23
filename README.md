@@ -13,6 +13,7 @@ Se puede publicar tal cual en GitHub Pages, Netlify, Vercel o cualquier hosting.
 | `content.js` | **El único archivo que necesitas editar para cambiar textos, precios y contactos.** |
 | `img/perfil.png` | Foto de perfil (nav, sobre mí, tarjeta del hero). |
 | `img/hero-bg.jpg` | Foto principal del bloque de inicio. |
+| `suplementos/` | **Página de FaithLure Supplements** (catálogo). Tiene su propio `README.md` y se puede publicar con un dominio aparte. |
 
 ## Cómo actualizar la información
 
@@ -53,6 +54,20 @@ coloques dentro hereda automáticamente el contraste correcto.
 - Aparición progresiva de las secciones al hacer scroll y resaltado del enlace activo en el menú.
 - Respeta `prefers-reduced-motion` y tiene estilos de impresión.
 - Enlace directo para saltar al contenido y foco visible para navegación con teclado.
+
+## Página de suplementos
+
+La carpeta `suplementos/` es un sitio completo e independiente
+(FaithLure Supplements): catálogo por categorías, productos en 3D, lista de
+pedido y compra por WhatsApp. Se publica junto con este sitio en
+`tudominio.com/suplementos/`, o por separado con su propio dominio.
+
+Las instrucciones para editar el catálogo y publicarlo están en
+`suplementos/README.md`.
+
+La sección "Suplementos" de esta página enlaza al catálogo mediante
+`supplements.ctaUrl` en `content.js`. Si dejas ese campo vacío (`""`), vuelve a
+mostrarse solo el aviso, sin botón.
 
 ## Publicar
 
